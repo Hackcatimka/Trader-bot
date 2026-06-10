@@ -1,0 +1,27 @@
+# secrets & local config
+.env
+*.env
+
+# database
+bot.db
+data/
+
+# python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# virtualenv
+venv/
+.venv/
+env/
+
+# logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
