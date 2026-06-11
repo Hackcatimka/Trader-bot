@@ -1,10 +1,29 @@
 import asyncio
 import logging
+import random
 
 from aiogram import Bot
 from aiogram.exceptions import TelegramForbiddenError, TelegramBadRequest
 
 logger = logging.getLogger(__name__)
+
+_HEADERS = [
+    "🚀🚀🚀 <b>ОЙ ОЙ ОЙ стой стой стой!!</b>",
+    "👀 <b>ЭÉÉÉ, ты видел это?!</b>",
+    "🔥🔥🔥 <b>ЧТО-ТО ПРОИСХОДИТ!</b>",
+    "⚡️ <b>АЛЛО, ЗЕМЛЯ, ТУТ ДВИЖУХА!</b>",
+    "🤯 <b>БРАТАН, СМОТРИ СЮДА!</b>",
+    "💣 <b>ВНИМАНИЕ, ВНИМАНИЕ!</b>",
+]
+
+_FOOTERS = [
+    "ну ты сам решай конечно... я просто говорю 🤷‍♀️",
+    "дальше сам, я своё дело сделал 😇",
+    "это не сигнал, это просто наблюдение... или нет? 👁",
+    "мне заплатили только за то чтобы сообщить, остальное на тебе 🫡",
+    "хочешь — входи, хочешь — нет, я не твоя мама 🙃",
+    "ладно, не буду мешать. удачи там 🍀",
+]
 
 
 def _format_signal(sig: dict) -> str:
@@ -23,13 +42,16 @@ def _format_signal(sig: dict) -> str:
     else:
         vol_str = f"${vol_24h:,.0f}"
 
+    header = random.choice(_HEADERS)
+    footer = random.choice(_FOOTERS)
+
     return (
-        "🚀🚀🚀 <b>ОЙ ОЙ ОЙ стой стой стой!!</b>\n\n"
+        f"{header}\n\n"
         f"монета:    <b>{sym}</b>  <i>[{exchange}]</i> 👀\n"
         f"цена:      <b>${price:.6g}</b>  (<b>+{price_change:.1f}%</b> за {tf} мин) 📈\n"
         f"объём:     <b>+{volume_change:.0f}%</b> к предыдущим {tf} мин 💥\n"
         f"объём 24h: <b>{vol_str}</b> 💰\n\n"
-        "ну ты сам решай конечно... я просто говорю 🤷‍♀️"
+        f"{footer}"
     )
 
 
